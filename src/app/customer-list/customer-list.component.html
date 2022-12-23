@@ -1,1 +1,48 @@
-<p>customer-list works!</p>
+
+<div class="mat-elevation-z8">
+  <h2 class="text-center">Customer List</h2>
+  <table mat-table [dataSource]="customers">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let customers"> {{customers.firstName + " " + customers.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateOfBirth">
+      <th mat-header-cell *matHeaderCellDef> Date of Birth </th>
+      <td mat-cell *matCellDef="let customers"> {{customers.dateOfBirth}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mobile">
+      <th mat-header-cell *matHeaderCellDef> Mobile </th>
+      <td mat-cell *matCellDef="let customers"> {{customers.mobile}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let customers"> {{customers.address1 + " " + customers.address2}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef> Gender </th>
+      <td mat-cell *matCellDef="let customers"> {{customers.gender}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Actions </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
