@@ -1,55 +1,68 @@
 <div class="col-md-7 offset-md-2">
-  <h3>Create Customer</h3><hr>
-  <form (ngSubmit)="onSubmit(custommers)">
+  <h3>Create Customer</h3>
+  <hr />
+  <form [formGroup]="customer" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName"> First Name</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="custommers.firstName" name="firstName" />
-    </div><br/>
+      <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" />
+    </div>
+    <br />
     <div class="form-group">
       <label for="lastName"> Last Name</label>
-      <input type="text" class="form-control" id="lastName" [(ngModel)]="custommers.lastName" name="lastName" />
-    </div><br/>
+      <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" />
+    </div>
+    <br />
     <div class="form-group">
       <label for="dateOfBirth"> Date Of Birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="custommers.dateOfBirth"
-        name="dateOfBirth" />
-    </div><br/>
+      <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" />
+    </div>
+    <br />
     <div class="form-group">
       <label for="mobile"> Mobile No</label>
-      <input type="text" class="form-control" id="mobile" [(ngModel)]="custommers.mobile" name="mobile" />
-    </div><br/>
+      <input type="text" class="form-control" id="mobile" formControlName="mobile" name="mobile" />
+    </div>
+    <br />
     <div class="form-group">
       <label for="address1"> Address 1</label>
-      <textarea class="form-control" id="address1" cols="20" rows="5" [(ngModel)]="custommers.address1"
+      <textarea class="form-control" id="address1" cols="20" rows="5" formControlName="address1"
         name="address1"></textarea>
-    </div><br/>
+    </div>
+    <br />
     <div class="form-group">
       <label for="address2"> Address 2</label>
-      <textarea class="form-control" id="address2" cols="20" rows="5" [(ngModel)]="custommers.address2"
+      <textarea class="form-control" id="address2" cols="20" rows="5" formControlName="address2"
         name="address2"></textarea>
-    </div><br/>
+    </div>
+    <br />
     <div class="form-group">
       <label for="age"> Age</label>
-      <input type="number" class="form-control" id="age" min="10" max="120" [(ngModel)]="custommers.age" name="age" />
-    </div><br/>
-    <div class="form-group">Gender
+      <input type="number" class="form-control" id="age" min="10" max="120" formControlName="age" name="age" />
+    </div>
+    <br />
+    <div class="form-group">
+      Gender
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="male" id="male" value="male" [(ngModel)]="custommers.gender"/>
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender" />
         <label class="form-check-label" for="male">Male</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="female" id="female" value="female" [(ngModel)]="custommers.gender"/>
+        <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+          formControlName="gender" />
         <label class="form-check-label" for="female">Female</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="others" id="others" value="others" [(ngModel)]="custommers.gender"/>
+        <input class="form-check-input" type="radio" name="gender" id="others" value="others"
+          formControlName="gender" />
         <label class="form-check-label" for="others">Others</label>
       </div>
-    </div><br>
+    </div>
+    <br />
     <div class="form-group">
       <label for="email"> Email</label>
-      <input type="email" class="form-control" id="email" [(ngModel)]="custommers.email" name="email" />
-    </div><br><br>
+      <input type="email" class="form-control" id="email" formControlName="email" name="email" />
+    </div>
+    <br />
     <button type="submit" class="btn btn-success">Submit</button>
-  </form>
+  </form><br />
+  <a routerLink="/customers">Back to Customer List</a>
 </div>

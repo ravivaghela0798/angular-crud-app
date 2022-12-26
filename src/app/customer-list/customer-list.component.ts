@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CustomerService } from './../service/customer.service';
 import { Customer } from './../model/customer';
 import { Component, OnInit } from '@angular/core';
@@ -9,19 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerListComponent implements OnInit {
 
-  customers : Customer[];
+  customers: Customer[];
 
-  constructor(private customerService : CustomerService) { }
+  constructor(private customerService: CustomerService, private routes: Router) { }
 
   ngOnInit(): void {
     this.getAllCustomers();
   }
 
-  private getAllCustomers(){
+  redirectToCustomerList() {
+    this.routes.navigate(['/customers']);
+  }
+
+  private getAllCustomers() {
     this.customerService.getAllcustomers().subscribe(
       data => {
         this.customers = data;
-      }
-    );
+      });
+  }
+
+  deleteCustomer(id: number) {
+    this.customerService.deleteCustomer(id).subscribe(data => {
+      console.log(data);
+      this.redirectToCustomerList();
+    })
   }
 }

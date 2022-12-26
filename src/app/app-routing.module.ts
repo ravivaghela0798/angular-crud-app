@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'customers', pathMatch: 'full' },
+  { path: 'update/:id', component: CreateCustomerComponent },
   { path: 'create-customer', component: CreateCustomerComponent },
   { path: 'customers', component: CustomerListComponent }
 
