@@ -1,12 +1,13 @@
-import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/', pathMatch: 'full' },
-  { path: 'appComponent', component: CustomerFormComponent },
-  { path: 'addCustomer', component: CustomerFormComponent }
+  { path: '', redirectTo: 'customers', pathMatch: 'full' },
+  { path: 'create-customer', component: CreateCustomerComponent },
+  { path: 'customers', component: CustomerListComponent }
+
 ];
 
 @NgModule({

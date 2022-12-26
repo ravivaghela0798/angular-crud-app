@@ -1,40 +1,25 @@
-import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CustomerFormComponent } from './customer-form/customer-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './navbar/navbar.component';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerListComponent,
-    CustomerFormComponent,
-    NavbarComponent
+    CreateCustomerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
     HttpClientModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [
-    AppComponent,
-    CustomerListComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
