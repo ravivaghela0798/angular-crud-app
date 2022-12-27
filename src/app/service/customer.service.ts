@@ -8,27 +8,27 @@ import { Observable } from 'rxjs';
 })
 export class CustomerService {
 
-  baseUrl: string = "http://localhost:8080";
+  baseUrl: string = "http://localhost:8080/customer";
 
   constructor(private http: HttpClient) { }
 
-  getCustomerById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getCustomerById/${id}`);
+  getById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getById/${id}`);
   }
 
-  getAllcustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(`${this.baseUrl}/getAllCustomers`);
+  getAll(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`${this.baseUrl}/getAll`);
   }
 
-  saveCustomer(customer: Customer): Observable<Object> {
-    return this.http.post<Object>(`${this.baseUrl}/saveCustomer`, customer);
+  save(customer: Customer): Observable<Object> {
+    return this.http.post<Object>(`${this.baseUrl}/save`, customer);
   }
 
-  updateCustomer(id: number, customer: Customer): Observable<Customer[]> {
-    return this.http.put<Customer[]>(`${this.baseUrl}/updateCustomer/${id}`, customer);
+  update(id: number, customer: Customer): Observable<Customer[]> {
+    return this.http.put<Customer[]>(`${this.baseUrl}/update/${id}`, customer);
   }
 
-  deleteCustomer(id: number): Observable<String> {
-    return this.http.delete<String>(`${this.baseUrl}/deleteCustomer/${id}`);
+  delete(id: number): Observable<String> {
+    return this.http.delete<String>(`${this.baseUrl}/delete/${id}`);
   }
 }

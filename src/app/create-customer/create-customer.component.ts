@@ -2,7 +2,7 @@ import { CustomerService } from './../service/customer.service';
 import { Customer } from './../model/customer';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, NumberValueAccessor, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { first } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ export class CreateCustomerComponent implements OnInit {
 
   custommers: Customer = new Customer();
   id: number;
-  isEdit: Boolean;;
+  isCreate: Boolean;;
 
   customer: FormGroup;
 
@@ -22,14 +22,13 @@ export class CreateCustomerComponent implements OnInit {
     private customerService: CustomerService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
 
-    this.id = this.route.snapshot.params['id'];
-    this.isEdit = !this.id;
+    this.id = this.activeRoute.snapshot.params['id'];
+    this.isCreate = !this.id;
 
 
     this.customer = this.formBuilder.group({
@@ -44,68 +43,48 @@ export class CreateCustomerComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     })
 
-    if (!this.isEdit) {
-      this.getCustomerById();
+    if (!this.isCreate) {
+      this.getById();
     }
 
   }
 
-  private getCustomerById() {
-    this.customerService.getCustomerById(this.id)
+  confirm(){
+
+  }
+
+  private getById() {
+    this.customerService.getById(this.id)
       .pipe(first())
       .subscribe(x => this.customer.patchValue(x));
-    // this.customerService.getCustomerById(this.id).subscribe(
-    //   data => {
-    //     this.customer = new FormGroup({
-    //       firstName: new FormControl(data['firstName']),
-    //       lastName: new FormControl(data['lastName']),
-    //       dateOfBirth: new FormControl(data['dateOfBirth']),
-    //       mobile: new FormControl(data['mobile']),
-    //       address1: new FormControl(data['address1']),
-    //       address2: new FormControl(data['address2']),
-    //       age: new FormControl(data['age']),
-    //       gender: new FormControl(data['gender']),
-    //       email: new FormControl(data['email']),
-    //     })
-    //   });
-  }
-  // private redirectCustomerList() {
-  //   this.router.navigate(['/customers']);
-  // }
-
-  private saveCustomer() {
-    this.customerService.saveCustomer(this.customer.value)
-      .pipe(first())
-      .subscribe(() => {
-        this.router.navigate(['/customers'], { relativeTo: this.route });
-      }, error => console.log(error));
-    // this.customerService.saveCustomer(this.customer.value).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.redirectCustomerList();
-    //   },
-    //   (error) => console.log(error)
-    // );
   }
 
-  private updateCustomer() {
-    this.customerService.updateCustomer(this.id, this.customer.value)
+  private save() {
+    this.customerService.save(this.customer.value)
       .pipe(first())
       .subscribe(() => {
-        this.router.navigate(['/customers'], { relativeTo: this.route });
+        this.router.navigate(['/customers'], { relativeTo: this.activeRoute });
       }, error => console.log(error));
-    // this.customerService.updateCustomer(this.id, this.customer.value).subscribe(data => {
-    //   console.log(data, "Data Updated Successfully");
-    // })
+  }
+
+  private update() {
+    this.customerService.update(this.id, this.customer.value)
+      .pipe(first())
+      .subscribe(() => {
+        this.router.navigate(['/customers'], { relativeTo: this.activeRoute });
+      }, error => console.log(error));
   }
 
   onSubmit() {
-    if (this.isEdit) {
-      this.saveCustomer();
+    if (this.isCreate) {
+      this.save();
     } else {
-      this.updateCustomer();
+      this.update();
     }
   }
 
+  cancel() {
+      this.router.navigateByUrl('/customers');
+  }
 
 }

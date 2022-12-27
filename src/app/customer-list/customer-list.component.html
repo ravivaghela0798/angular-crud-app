@@ -19,12 +19,16 @@
       <td>{{ customer.mobile }}</td>
       <td>{{ customer.address1 + " " + customer.address2 }}</td>
       <td>{{ customer.gender }}</td>
-      <td>
-        <a routerLink="/update/{{customer.id}}">
-          <i class="fa-edit">Edit</i>
-        </a>
-        <i type="button" (click)="deleteCustomer(customer.id)" class="fa-trash">Delete</i>
+      <td><a routerLink="/update/{{customer.id}}" class="btn btn-primary m-1">Edit</a> &nbsp;&nbsp;
+        <button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage" placement="left" (confirm)="deleteCustomer(customer.id)"
+          (cancel)="cancelClicked = true">
+          Delete
+        </button>
       </td>
+    </tr>
+    <tr scope="row" *ngIf="customers === undefined">
+      <td colspan="6" class="text-center">No record found</td>
     </tr>
   </tbody>
 </table>
