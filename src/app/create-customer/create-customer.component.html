@@ -1,66 +1,72 @@
 <div class="col-md-7 offset-md-2">
-  <h3 *ngIf="isCreate">Create Customer</h3>
-  <h3 *ngIf="!isCreate">Update Customer</h3>
+  <h2 *ngIf="isCreate">Create Customer</h2>
+  <h2 *ngIf="!isCreate">Update Customer</h2>
   <hr />
   <form [formGroup]="customer" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName"> First Name</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" />
+      <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName"
+        [ngClass]="{'is-invalid':submitted && customer.controls['firstName'].errors}" />
     </div>
     <br />
     <div class="form-group">
       <label for="lastName"> Last Name</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" />
+      <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName"
+      [ngClass]="{'is-invalid':submitted && customer.controls['lastName'].errors}"  />
     </div>
     <br />
     <div class="form-group">
       <label for="dateOfBirth"> Date Of Birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" />
+      <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth"
+      [ngClass]="{'is-invalid':submitted && customer.controls['dateOfBirth'].errors}"  />
     </div>
     <br />
     <div class="form-group">
-      <label for="mobile"> Mobile No</label>
-      <input type="text" class="form-control" id="mobile" formControlName="mobile" name="mobile" />
+      <label for="mobile"> Mobile </label>
+      <input type="text" class="form-control" id="mobile" formControlName="mobile" name="mobile"
+      [ngClass]="{'is-invalid':submitted && customer.controls['mobile'].errors}"  />
     </div>
     <br />
     <div class="form-group">
       <label for="address1"> Address 1</label>
       <textarea class="form-control" id="address1" cols="20" rows="5" formControlName="address1"
-        name="address1"></textarea>
+        name="address1" [ngClass]="{'is-invalid':submitted && customer.controls['address1'].errors}" ></textarea>
     </div>
     <br />
     <div class="form-group">
       <label for="address2"> Address 2</label>
       <textarea class="form-control" id="address2" cols="20" rows="5" formControlName="address2"
-        name="address2"></textarea>
+        name="address2" [ngClass]="{'is-invalid':submitted && customer.controls['address2'].errors}" ></textarea>
     </div>
     <br />
     <div class="form-group">
       <label for="age"> Age</label>
-      <input type="number" class="form-control" id="age" min="10" max="120" formControlName="age" name="age" />
+      <input type="number" class="form-control" id="age" min="10" max="120" formControlName="age" name="age"
+      [ngClass]="{'is-invalid':submitted && customer.controls['age'].errors}" />
     </div>
     <br />
     <div class="form-group">
       Gender
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender" />
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender"
+        [ngClass]="{'is-invalid':submitted && customer.controls['gender'].errors}" />
         <label class="form-check-label" for="male">Male</label>
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="gender" id="female" value="female"
-          formControlName="gender" />
+          formControlName="gender" [ngClass]="{'is-invalid':submitted && customer.controls['gender'].errors}" />
         <label class="form-check-label" for="female">Female</label>
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="gender" id="others" value="others"
-          formControlName="gender" />
+          formControlName="gender" [ngClass]="{'is-invalid':submitted && customer.controls['gender'].errors}"  />
         <label class="form-check-label" for="others">Others</label>
       </div>
     </div>
     <br />
     <div class="form-group">
       <label for="email"> Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email" name="email" />
+      <input type="email" class="form-control" id="email" formControlName="email" name="email" [ngClass]="{'is-invalid':submitted && customer.controls['email'].errors}"  />
     </div>
     <br />
     <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
