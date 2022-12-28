@@ -1,13 +1,14 @@
 import { FormGroup, FormControl } from '@angular/forms';
+
 export default class ValidateForm {
-  static validateAllFields(formGroup: FormGroup){
-    Object.keys(formGroup.controls).forEach(field =>{
+  static validateAllFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
-      if(control instanceof FormControl){
+      if (control instanceof FormControl) {
         control.markAsDirty({
-          onlySelf : true
+          onlySelf: true
         })
-      } else if(control instanceof FormGroup){
+      } else if (control instanceof FormGroup) {
         this.validateAllFields(control)
       }
     })

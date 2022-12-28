@@ -7,40 +7,48 @@
       <label for="firstName"> Firstname</label>
       <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" />
     </div>
-    <small *ngIf="customerForm.controls['firstName'].dirty && customerForm.hasError('required', 'firstName')"
-      class="text-danger">
-      Firstname is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('firstName').invalid && customerForm.get('firstName').touched)">
+      <small *ngIf="customerForm.get('firstName').errors?.['required']" class="text-danger">Firstname is required <br></small>
+      <small *ngIf="customerForm.get('firstName').errors?.['pattern']" class="text-danger">
+       Firstname is invalid
+        <br>
+      </small>
+    </div>
     <br />
 
     <div class="form-group">
       <label for="lastName"> Lastname</label>
       <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" />
     </div>
-    <small *ngIf="customerForm.controls['lastName'].dirty && customerForm.hasError('required', 'lastName')"
-      class="text-danger">
-      Lastname is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('lastName').invalid && customerForm.get('lastName').touched)">
+      <small *ngIf="customerForm.get('lastName').errors?.['required']" class="text-danger">Lastname is required <br></small>
+      <small *ngIf="customerForm.get('lastName').errors?.['pattern']" class="text-danger">
+        Lastname is invalid
+         <br>
+       </small>
+    </div>
     <br />
 
     <div class="form-group">
       <label for="dateOfBirth"> Date of birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" />
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" [max]="getToday()" />
     </div>
-    <small *ngIf="customerForm.controls['dateOfBirth'].dirty && customerForm.hasError('required', 'dateOfBirth')"
-      class="text-danger">
-      Date of birth is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('dateOfBirth').invalid && customerForm.get('dateOfBirth').touched)">
+      <small *ngIf="customerForm.get('dateOfBirth').errors?.['required']" class="text-danger">Date of birth is required <br></small>
+    </div>
     <br />
 
     <div class="form-group">
       <label for="mobile"> Mobile</label>
       <input type="text" class="form-control" id="mobile" name="mobile" formControlName="mobile" />
     </div>
-    <small *ngIf="customerForm.controls['mobile'].dirty && customerForm.hasError('required', 'mobile')"
-      class="text-danger">
-      Mobile no is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('mobile').invalid && customerForm.get('mobile').touched)">
+      <small *ngIf="customerForm.get('mobile').errors?.['required']" class="text-danger">Mobile no is required <br></small>
+      <small *ngIf="customerForm.get('mobile').errors?.['pattern']" class="text-danger">
+        Mobile no is invalid
+        <br>
+      </small>
+    </div>
     <br />
 
     <div class="form-group">
@@ -48,10 +56,13 @@
       <textarea class="form-control" id="address1" cols="20" rows="5" name="address1"
         formControlName="address1"></textarea>
     </div>
-    <small *ngIf="customerForm.controls['address1'].dirty && customerForm.hasError('required', 'address1')"
-      class="text-danger">
-      Address 1 is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('address1').invalid && customerForm.get('address1').touched)">
+      <small *ngIf="customerForm.get('address1').errors?.['required']" class="text-danger">Address 1 is required <br></small>
+      <small *ngIf="customerForm.get('address1').errors?.['minlength'] || customerForm.get('address1').errors?.['maxlength']" class="text-danger">
+        Please Enter 1 to 100 Charater in the address 1
+        <br>
+      </small>
+    </div>
     <br />
 
     <div class="form-group">
@@ -59,19 +70,23 @@
       <textarea class="form-control" id="address2" cols="20" rows="5" name="address2"
         formControlName="address2"></textarea>
     </div>
-    <small *ngIf="customerForm.controls['address2'].dirty && customerForm.hasError('required', 'address2')"
-      class="text-danger">
-      Address 2 is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('address2').invalid && customerForm.get('address2').touched)">
+      <small *ngIf="customerForm.get('address2').errors?.['required']" class="text-danger">Address 2 is required <br></small>
+      <small *ngIf="customerForm.get('address2').errors?.['minlength'] || customerForm.get('address2').errors?.['maxlength']" class="text-danger">
+        Please Enter 5 to 100 Charater in the address 2
+        <br>
+      </small>
+    </div>
     <br />
 
     <div class="form-group">
       <label for="age"> Age</label>
-      <input type="number" class="form-control" id="age" min="10" max="120" name="age" formControlName="age" />
+      <input type="number" class="form-control" id="age" min="10" max="120" name="age" formControlName="age" value="{{showAge}}"/>
     </div>
-    <small *ngIf="customerForm.controls['age'].dirty && customerForm.hasError('required', 'age')" class="text-danger">
-      Age is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('age').invalid && customerForm.get('age').touched)">
+      <small *ngIf="customerForm.get('age').errors?.['required']" class="text-danger">Age is required <br></small>
+      <small *ngIf="customerForm.get('age').errors?.['pattern']" class="text-danger">Age is invalid <br></small>
+    </div>
     <br />
 
     <div class="form-group">
@@ -91,20 +106,19 @@
         <label class="form-check-label" for="others">Others</label>
       </div>
     </div>
-    <small *ngIf="customerForm.controls['gender'].dirty && customerForm.hasError('required', 'gender')"
-      class="text-danger">
-      Gender is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('gender').invalid && customerForm.get('gender').touched)">
+      <small *ngIf="customerForm.get('gender').errors?.['required']" class="text-danger">Gender is required <br></small>
+    </div>
     <br />
 
     <div class="form-group">
       <label for="email"> Email</label>
       <input type="email" class="form-control" id="email" formControlName="email" name="email" />
     </div>
-    <small *ngIf="customerForm.controls['email'].dirty && customerForm.hasError('required', 'email')"
-      class="text-danger">
-      Email is required
-    </small>
+    <div *ngIf="formSubmitted || (customerForm.get('email').invalid && customerForm.get('email').touched)">
+      <small *ngIf="customerForm.get('email').errors?.['required']" class="text-danger">Email is required <br></small>
+      <small *ngIf="customerForm.get('email').errors?.['pattern']" class="text-danger">Email is invalid <br></small>
+    </div>
     <br />
 
     <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;

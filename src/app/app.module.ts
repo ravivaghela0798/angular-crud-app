@@ -9,6 +9,7 @@ import { CreateCustomerComponent } from './create-customer/create-customer.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
       confirmButtonType: 'danger', // set defaults here
     }),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
