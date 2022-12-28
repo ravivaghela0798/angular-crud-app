@@ -1,8 +1,8 @@
 <div class="col-md-7 offset-md-2">
-  <h2 *ngIf="isCreate">Create customerForm</h2>
-  <h3 *ngIf="!isCreate">Update customerForm</h3>
+  <h2 *ngIf="isCreate">Create Customer</h2>
+  <h3 *ngIf="!isCreate">Update Customer Details</h3>
   <hr />
-  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" novalidate>
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="firstName"> Firstname</label>
       <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" />
@@ -106,9 +106,10 @@
       Email is required
     </small>
     <br />
+
     <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
     <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
   <br />
-  <a routerLink="/customerForms">Back to customerForm List</a>
+  <a routerLink="/customers">Back to customer list</a>
 </div>

@@ -13,8 +13,7 @@ import ValidateForm from './validateForm';
 export class CreateCustomerComponent implements OnInit {
 
   id: number;
-  isCreate: Boolean;
-  submitted = false;
+  isCreate: any;
   customerForm: FormGroup;
   public minDate = new Date();
   public maxDate = new Date(new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate() + 14));
@@ -32,21 +31,20 @@ export class CreateCustomerComponent implements OnInit {
     this.id = this.activeRoute.snapshot.params['id'];
     this.isCreate = !this.id;
 
-
     this.customerForm = this.formBuilder.group({
-      id: [this.id, Validators.required],
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      id: [this.id],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       mobile: ['', Validators.required],
       address1: ['', Validators.required],
       address2: ['', Validators.required],
       age: ['', Validators.required],
       gender: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', Validators.required],
     })
 
-    if (!this.isCreate) {
+    if (this.id) {
       this.getById();
     }
   }
@@ -74,11 +72,9 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     if (this.customerForm.valid) {
       if (this.isCreate) {
         this.save();
-        console.log(this.customerForm);
       } else {
         this.update();
       }
