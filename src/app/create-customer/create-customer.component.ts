@@ -1,9 +1,9 @@
 import { CustomerService } from './../service/customer.service';
-import { Customer } from './../model/customer';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { first } from 'rxjs';
+import ValidateForm from './validateForm';
 
 @Component({
   selector: 'app-create-customer',
@@ -13,9 +13,12 @@ import { first } from 'rxjs';
 export class CreateCustomerComponent implements OnInit {
 
   id: number;
-  isCreate: Boolean;;
+  isCreate: Boolean;
   submitted = false;
-  customer: FormGroup;
+  customerForm: FormGroup;
+  public minDate = new Date();
+  public maxDate = new Date(new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate() + 14));
+
 
   constructor(
     private customerService: CustomerService,
@@ -30,17 +33,17 @@ export class CreateCustomerComponent implements OnInit {
     this.isCreate = !this.id;
 
 
-    this.customer = this.formBuilder.group({
+    this.customerForm = this.formBuilder.group({
       id: [this.id, Validators.required],
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       dateOfBirth: ['', Validators.required],
-      mobile: ['', [Validators.minLength(5), Validators.maxLength(17), Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
-      address1: ['', [Validators.minLength(1), Validators.maxLength(100)]],
-      address2: ['', [Validators.minLength(5), Validators.maxLength(100)]],
-      age: ['', [Validators.minLength(10), Validators.maxLength(120)]],
+      mobile: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      age: ['', Validators.required],
       gender: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+      email: ['', [Validators.required, Validators.email]],
     })
 
     if (!this.isCreate) {
@@ -51,11 +54,11 @@ export class CreateCustomerComponent implements OnInit {
   private getById() {
     this.customerService.getById(this.id)
       .pipe(first())
-      .subscribe(x => this.customer.patchValue(x));
+      .subscribe(x => this.customerForm.patchValue(x));
   }
 
   private save() {
-    this.customerService.save(this.customer.value)
+    this.customerService.save(this.customerForm.value)
       .pipe(first())
       .subscribe(() => {
         this.router.navigate(['/customers'], { relativeTo: this.activeRoute });
@@ -63,7 +66,7 @@ export class CreateCustomerComponent implements OnInit {
   }
 
   private update() {
-    this.customerService.update(this.id, this.customer.value)
+    this.customerService.update(this.id, this.customerForm.value)
       .pipe(first())
       .subscribe(() => {
         this.router.navigate(['/customers'], { relativeTo: this.activeRoute });
@@ -72,21 +75,20 @@ export class CreateCustomerComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.customer.invalid) {
-      return
-    }
-    else {
+    if (this.customerForm.valid) {
       if (this.isCreate) {
         this.save();
-        console.log(this.customer);
+        console.log(this.customerForm);
       } else {
         this.update();
       }
+    }
+    else {
+      ValidateForm.validateAllFields(this.customerForm);
     }
   }
 
   cancel() {
     this.router.navigateByUrl('/customers');
   }
-
 }

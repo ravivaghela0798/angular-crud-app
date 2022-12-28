@@ -16,24 +16,21 @@ export class CustomerListComponent implements OnInit {
   public confirmClicked: boolean = false;
   public cancelClicked: boolean = false;
   customers: Customer[];
+  customerLength : number;
 
   constructor(
     private customerService: CustomerService,
     private routes: Router,
-    private activeRoute : ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.getAllCustomers();
   }
 
-  redirectToCustomerList() {
-    this.routes.navigate(['/customers']);
-  }
-
   private getAllCustomers() {
     this.customerService.getAll().subscribe((data) => {
       this.customers = data;
+      this.customerLength = data.length;
     });
   }
 
@@ -41,8 +38,9 @@ export class CustomerListComponent implements OnInit {
     this.customerService.delete(id)
       .pipe(first())
       .subscribe(() => {
-        this.routes.navigate(['/customers']);
-        window.location.reload()
+        this.getAllCustomers();
+        // window.location.reload()
+        // // this.routes.navigate(['/customers']);
       }, error => console.log(error));
   }
 }

@@ -1,201 +1,114 @@
 <div class="col-md-7 offset-md-2">
-  <h2 *ngIf="isCreate">Create Customer</h2>
-  <h3 *ngIf="!isCreate">Update Customer</h3>
+  <h2 *ngIf="isCreate">Create customerForm</h2>
+  <h3 *ngIf="!isCreate">Update customerForm</h3>
   <hr />
-  <form [formGroup]="customer" (ngSubmit)="onSubmit()">
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="form-group">
-      <label for="firstName"> First Name</label>
-      <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" [ngClass]="{
-          'is-invalid': submitted && customer.get('firstName').errors
-        }" required />
-      <div *ngIf="submitted && customer.get('firstName').errors['required']" class="alert alert-danger">
-        <div *ngIf="customer.get('firstName').dirty || customer.get('firstName').touched">
-          Firstname is required
-        </div>
-        <div *ngIf="submitted && customer.get('firstName').errors['invalid']">
-          Firstname is invalid
-        </div>
-        <div *ngIf="
-            submitted &&
-            customer.get('firstName').errors['minlength'] &&
-            customer.get('firstName').errors['maxlength']
-          ">
-          Firstname must be at least 4 to 100 characters long
-        </div>
-      </div>
+      <label for="firstName"> Firstname</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" formControlName="firstName" />
     </div>
+    <small *ngIf="customerForm.controls['firstName'].dirty && customerForm.hasError('required', 'firstName')"
+      class="text-danger">
+      Firstname is required
+    </small>
     <br />
 
     <div class="form-group">
-      <label for="lastName"> Last Name</label>
-      <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" [ngClass]="{
-          'is-invalid': submitted && customer.get('lastName').errors
-        }" required />
-      <div *ngIf="submitted && customer.get('lastName').errors['required']" class="alert alert-danger">
-        <div *ngIf="customer.get('lastName').dirty || customer.get('lastName').touched">
-          Lastname is required
-        </div>
-        <div *ngIf="submitted && customer.get('lastName').errors['invalid']">
-          Lastname is invalid
-        </div>
-        <div *ngIf="
-            submitted &&
-            customer.get('lastName').errors['minlength'] &&
-            customer.get('lastName').errors['maxlength']
-          ">
-          Lastname must be at least 4 to 100 characters long
-        </div>
-      </div>
+      <label for="lastName"> Lastname</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" formControlName="lastName" />
     </div>
+    <small *ngIf="customerForm.controls['lastName'].dirty && customerForm.hasError('required', 'lastName')"
+      class="text-danger">
+      Lastname is required
+    </small>
     <br />
 
     <div class="form-group">
-      <label for="dateOfBirth"> Date Of Birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth"
-        [ngClass]="{
-          'is-invalid': submitted && customer.get('dateOfBirth').errors
-        }" required />
-      <div *ngIf="submitted && customer.get('dateOfBirth').errors['required']" class="alert alert-danger">
-        <div *ngIf="customer.get('dateOfBirth').dirty || customer.get('dateOfBirth').touched">
-          Date of birth is required.
-        </div>
-        <div *ngIf="submitted && customer.get('dateOfBirth').errors['is-invalid']">
-          Date of birth is invalid.
-        </div>
-      </div>
+      <label for="dateOfBirth"> Date of birth</label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" />
     </div>
+    <small *ngIf="customerForm.controls['dateOfBirth'].dirty && customerForm.hasError('required', 'dateOfBirth')"
+      class="text-danger">
+      Date of birth is required
+    </small>
     <br />
 
     <div class="form-group">
-      <label for="mobile"> Mobile No</label>
-      <input type="text" class="form-control" id="mobile" formControlName="mobile" name="mobile"
-        [ngClass]="{ 'is-invalid': submitted && customer.get('mobile').errors }" required />
-      <div *ngIf="customer.get('mobile').dirty || customer.get('mobile').touched" class="alert alert-danger">
-        <div *ngIf="submitted && customer.get('mobile').errors['required']">
-          Mobile no is required.
-        </div>
-        <div *ngIf="
-            submitted &&
-            customer.get('mobile').errors['invalid'] &&
-            customer.get('mobile').errors['mobile']
-          ">
-          Mobile no is invalid.
-        </div>
-        <div *ngIf="
-            submitted &&
-            customer.get('mobile').errors['minlength'] &&
-            customer.get('mobile').errors['maxlength']
-          ">
-          Mobile should be at least 5 numbers to 17 numbers.
-        </div>
-      </div>
+      <label for="mobile"> Mobile</label>
+      <input type="text" class="form-control" id="mobile" name="mobile" formControlName="mobile" />
     </div>
+    <small *ngIf="customerForm.controls['mobile'].dirty && customerForm.hasError('required', 'mobile')"
+      class="text-danger">
+      Mobile no is required
+    </small>
     <br />
 
     <div class="form-group">
       <label for="address1"> Address 1</label>
-      <textarea class="form-control" id="address1" cols="20" rows="5" formControlName="address1" name="address1"
-        [ngClass]="{
-          'is-invalid': submitted && customer.get('address1').errors
-        }" required></textarea>
-      <div *ngIf="submitted && customer.get('address1').errors['required']">
-        <div *ngIf="customer.get('address1').dirty || customer.get('address1').touched" class="alert alert-danger">
-          Address 1 is required.
-        </div>
-        <div *ngIf="submitted && customer.get('address1').errors['is-invalid']">
-          Address 1 is invalid.
-        </div>
-      </div>
+      <textarea class="form-control" id="address1" cols="20" rows="5" name="address1"
+        formControlName="address1"></textarea>
     </div>
+    <small *ngIf="customerForm.controls['address1'].dirty && customerForm.hasError('required', 'address1')"
+      class="text-danger">
+      Address 1 is required
+    </small>
     <br />
 
     <div class="form-group">
       <label for="address2"> Address 2</label>
-      <textarea class="form-control" id="address2" cols="20" rows="5" formControlName="address2" name="address2"
-        [ngClass]="{
-          'is-invalid': submitted && customer.get('address2').errors
-        }" required></textarea>
-      <div *ngIf="submitted && customer.get('address2').errors['required']">
-        <div *ngIf="customer.get('address2').dirty || customer.get('address2').touched" class="alert alert-danger">
-          Address 2 is required.
-        </div>
-        <div *ngIf="submitted && customer.get('address2').errors['is-invalid']">
-          Address 2 is invalid.
-        </div>
-      </div>
+      <textarea class="form-control" id="address2" cols="20" rows="5" name="address2"
+        formControlName="address2"></textarea>
     </div>
+    <small *ngIf="customerForm.controls['address2'].dirty && customerForm.hasError('required', 'address2')"
+      class="text-danger">
+      Address 2 is required
+    </small>
     <br />
 
     <div class="form-group">
       <label for="age"> Age</label>
-      <input type="number" class="form-control" id="age" min="10" max="120" formControlName="age" name="age"
-        [ngClass]="{ 'is-invalid': submitted && customer.get('age').errors }" required />
-      <div *ngIf="submitted && customer.get('age').errors['required']">
-        <div *ngIf="customer.get('age').dirty || customer.get('age').touched" class="alert alert-danger">
-          Age is required.
-        </div>
-        <div *ngIf="submitted && customer.get('age').errors['is-invalid']">
-          Age is invalid.
-        </div>
-      </div>
+      <input type="number" class="form-control" id="age" min="10" max="120" name="age" formControlName="age" />
     </div>
+    <small *ngIf="customerForm.controls['age'].dirty && customerForm.hasError('required', 'age')" class="text-danger">
+      Age is required
+    </small>
     <br />
 
     <div class="form-group">
       Gender
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="gender" id="male" value="Male" formControlName="gender"
-          [ngClass]="{
-            'is-invalid': submitted && customer.get('gender').errors
-          }" required />
+        <input class="form-check-input" type="radio" name="gender" id="male" value="Male" formControlName="gender" />
         <label class="form-check-label" for="male">Male</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="gender" id="female" value="Female" formControlName="gender"
-          [ngClass]="{
-            'is-invalid': submitted && customer.get('gender').errors
-          }" />
+        <input class="form-check-input" type="radio" name="gender" id="female" value="Female"
+          formControlName="gender" />
         <label class="form-check-label" for="female">Female</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="gender" id="others" value="Others" formControlName="gender"
-          [ngClass]="{
-            'is-invalid': submitted && customer.get('gender').errors
-          }" />
+        <input class="form-check-input" type="radio" name="gender" id="others" value="Others"
+          formControlName="gender" />
         <label class="form-check-label" for="others">Others</label>
       </div>
-      <div *ngIf="customer.get('gender').invalid && (customer.get('gender').dirty || customer.get('gender').touched)"
-        class="alert alert-danger">
-        <div *ngIf="submitted && customer.get('gender').errors['required']">
-          Gender is required.
-        </div>
-      </div>
     </div>
+    <small *ngIf="customerForm.controls['gender'].dirty && customerForm.hasError('required', 'gender')"
+      class="text-danger">
+      Gender is required
+    </small>
     <br />
 
     <div class="form-group">
       <label for="email"> Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email" name="email"
-        [ngClass]="{ 'is-invalid': submitted && customer.get('email').errors }" required />
-      <div *ngIf="submitted && customer.get('email').errors['required']">
-        <div *ngIf="customer.get('email').dirty || customer.get('email').touched" class="alert alert-danger">
-          Email is required.
-        </div>
-        <div *ngIf="
-            submitted &&
-            customer.get('email').errors['is-invalid'] &&
-            customer.get('email').errors['email']
-          ">
-          Email is invalid.
-        </div>
-      </div>
+      <input type="email" class="form-control" id="email" formControlName="email" name="email" />
     </div>
+    <small *ngIf="customerForm.controls['email'].dirty && customerForm.hasError('required', 'email')"
+      class="text-danger">
+      Email is required
+    </small>
     <br />
-    <button [disabled]="customer.invalid" type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
-    <button type="button" class="btn btn-danger" (click)="cancel()">
-      Cancel
-    </button>
+    <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
   <br />
-  <a routerLink="/customers">Back to Customer List</a>
+  <a routerLink="/customerForms">Back to customerForm List</a>
 </div>
