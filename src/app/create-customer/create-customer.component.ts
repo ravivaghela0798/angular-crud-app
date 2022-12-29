@@ -96,14 +96,4 @@ export class CreateCustomerComponent implements OnInit {
     return new Date().toISOString().split('T')[0]
   }
 
-  // ageCalculator() {
-  //   if (this.age) {
-  //     console.log(this.age);
-  //     console.log(this.customerForm.value.age);
-  //     console.log(this.showAge);
-  //     const convertAge = new Date(this.age);
-  //     const timeDiff = Math.abs(Date.now() - convertAge.getTime());
-  //     this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-  //   }
-  // }
 }
