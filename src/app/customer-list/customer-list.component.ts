@@ -20,7 +20,6 @@ export class CustomerListComponent implements OnInit {
 
   constructor(
     private customerService: CustomerService,
-    private routes: Router,
   ) { }
 
   ngOnInit(): void {
@@ -35,12 +34,8 @@ export class CustomerListComponent implements OnInit {
   }
 
   deleteCustomer(id: number) {
-    this.customerService.delete(id)
-      .pipe(first())
-      .subscribe(() => {
-        this.getAllCustomers();
-        // window.location.reload()
-        // // this.routes.navigate(['/customers']);
+    this.customerService.delete(id).subscribe(() => {
+          this.getAllCustomers();
       }, error => console.log(error));
   }
 }

@@ -16,8 +16,11 @@ export class CreateCustomerComponent implements OnInit {
   isCreate: any;
   formSubmitted: Boolean = false;
   customerForm: FormGroup;
-  age;
-  showAge;
+  minDate = "2021-01-01";
+  maxDate = new Date();
+
+  // age;
+  // showAge;
 
   constructor(
     private customerService: CustomerService,
@@ -47,7 +50,6 @@ export class CreateCustomerComponent implements OnInit {
     if (this.id) {
       this.getById();
     }
-    this.ageCalculator();
   }
 
   private getById() {
@@ -94,14 +96,14 @@ export class CreateCustomerComponent implements OnInit {
     return new Date().toISOString().split('T')[0]
   }
 
-  ageCalculator() {
-    if (this.age) {
-      console.log(this.age);
-      console.log(this.customerForm.value.age);
-      console.log(this.showAge);
-      const convertAge = new Date(this.age);
-      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
-      this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-    }
-  }
+  // ageCalculator() {
+  //   if (this.age) {
+  //     console.log(this.age);
+  //     console.log(this.customerForm.value.age);
+  //     console.log(this.showAge);
+  //     const convertAge = new Date(this.age);
+  //     const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+  //     this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
+  //   }
+  // }
 }

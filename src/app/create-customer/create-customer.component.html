@@ -31,7 +31,7 @@
 
     <div class="form-group">
       <label for="dateOfBirth"> Date of birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" [max]="getToday()" />
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth" [min]="minDate" [max]="getToday()" />
     </div>
     <div *ngIf="formSubmitted || (customerForm.get('dateOfBirth').invalid && customerForm.get('dateOfBirth').touched)">
       <small *ngIf="customerForm.get('dateOfBirth').errors?.['required']" class="text-danger">Date of birth is required <br></small>
@@ -81,7 +81,7 @@
 
     <div class="form-group">
       <label for="age"> Age</label>
-      <input type="number" class="form-control" id="age" min="10" max="120" name="age" formControlName="age" value="{{showAge}}"/>
+      <input type="number" class="form-control" id="age" min="10" max="120" name="age" formControlName="age" />
     </div>
     <div *ngIf="formSubmitted || (customerForm.get('age').invalid && customerForm.get('age').touched)">
       <small *ngIf="customerForm.get('age').errors?.['required']" class="text-danger">Age is required <br></small>

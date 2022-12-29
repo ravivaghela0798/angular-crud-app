@@ -12,8 +12,8 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
-  getById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getById/${id}`);
+  getById(id: number): Observable<Customer> {
+    return this.http.get<Customer>(`${this.baseUrl}/getById/${id}`);
   }
 
   getAll(): Observable<Customer[]> {
@@ -28,7 +28,7 @@ export class CustomerService {
     return this.http.put<Customer[]>(`${this.baseUrl}/update/${id}`, customer);
   }
 
-  delete(id: number): Observable<String> {
-    return this.http.delete<String>(`${this.baseUrl}/delete/${id}`);
+  delete(id: number) {
+    return this.http.delete(`${this.baseUrl}/delete/${id}`);
   }
 }
